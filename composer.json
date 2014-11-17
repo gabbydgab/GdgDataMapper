@@ -1,0 +1,39 @@
+{
+    "name": "gabbydgab/gdg-data-mapper",
+    "description": "Abstract common library for web applications",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "gabbydgab",
+        "data mapper"
+    ],
+    "homepage": "https://github.com/gabbydgab/GdgDataMapper",
+    "authors": [
+        {
+            "name": "Gab Amba",
+            "email": "gamba@gabbydgab.com",
+            "homepage": "http://www.gabbydgab.com/"
+        }
+    ],
+    "require": {
+        "zendframework/zend-db": "2.2.*",
+        "zendframework/zend-stdlib": "2.2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "GdgDataMapper\\Exception\\": "src/Exception/",
+            "GdgDataMapper\\Mapper\\": "src/Mapper/",
+            "GdgDataMapper\\Entity\\": "src/Entity/",
+            "GdgDataMapper\\Adapter\\": "src/Adapter/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GdgDataMapperTest\\": "tests/GdgDataMapperTest/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "phpunit/php-invoker": "1.*"
+    }
+}
