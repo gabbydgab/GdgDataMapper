@@ -1,6 +1,6 @@
 {
     "name": "gabbydgab/gdg-data-mapper",
-    "description": "Abstract common library for web applications",
+    "description": "Abstract PHP library that moves data between objects and a database while keeping them independent of each other and the mapper itself",
     "license": "MIT",
     "type": "library",
     "keywords": [
