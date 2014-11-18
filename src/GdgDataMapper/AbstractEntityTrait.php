@@ -55,7 +55,7 @@ trait AbstractEntityTrait
     public function getEntityPrototype()
     {
         if (!$this->entity) {
-            throw new Exception($message, $code, $previous);
+            throw new Exception("Entity prototype is not set");
         }
         
         return $this->entity;

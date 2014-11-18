@@ -26,7 +26,7 @@
 
 namespace GdgDataMapperTest;
 
-use GdgDataMapper\AbstractEntityTrait;
+//use GdgMapperTest\SampleEntity;
 
 /**
  * GdgDataMapperTest\EntityPrototypeTest
@@ -36,20 +36,22 @@ use GdgDataMapper\AbstractEntityTrait;
 class EntityPrototypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \GdgDataMapper\AbstractEntityTrait
+     * @var \GdgDataMapperTest\SampleEntity
      */
     protected $entity;
     
     /**
      * @test
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Entity prototype is not set
+     * 
      */
     public function mustReturnEntityPrototype()
     {
-        $this->entity = $this->getMockBuilder("\GdgDataMapper\AbtractEntityTrait")
-                ->getMockForTrait();
-        
+        $this->entity = new \GdgDataMapperTest\SampleEntity();
+        $this->entity->getKeyId();
+//        $entity = $this->getMockBuilder("GdgDataMapper\Entity\AbstractPrototype");
+//        $mock->setEntityPrototype($entity);
+//        var_dump($mock); exit;
+//        $mock->getEntityPrototype();
 //        $this->entity->getKeyId();
     }
 }
