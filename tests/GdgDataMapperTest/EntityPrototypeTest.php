@@ -40,6 +40,9 @@ class EntityPrototypeTest extends \PHPUnit_Framework_TestCase
      */
     protected $entity;
     
+    /**
+     * @var \GdgDataMapper\AbstractEntityTrait
+     */
     protected $trait;
 
     public function setUp()
