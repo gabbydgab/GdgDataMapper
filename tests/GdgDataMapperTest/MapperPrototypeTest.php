@@ -24,39 +24,52 @@
  * THE SOFTWARE.
  */
 
-namespace GdgDataMapper;
+namespace GdgDataMapperTest;
 
-use GdgDataMapper\Mapper\AwareInterface AS MapperAwareInterface;
 use GdgDataMapper\Exception\RuntimeException AS GdgDataMapperRuntimeException;
 
 /**
- * GdgDataMapper\AbstractMapperTrait
+ * GdgDataMapperTest\MapperPrototypeTest
  * 
- * @package GdgDataMapper
+ * @package GdgDataMapperTest
  */
-trait AbstractMapperTrait
+class MapperPrototypeTest extends \PHPUnit_Framework_TestCase
 {
-    /** 
-     * @var \GdgDataMapper\Mapper\AbstractPrototype 
+    /**
+     * @var \GdgDataMapper\Mapper\AbstractPrototype
      */
     protected $mapper;
     
+    /** 
+     * @var \GdgDataMapper\AbstractMapperTrait
+     */
+    protected $trait;
+
     
-    public function setMapperPrototype(MapperAwareInterface $mapper)
+    public function setUp()
     {
-        $this->mapper = $mapper;
+        $this->mapper = $this->getMockBuilder("GdgDataMapper\Mapper\AbstractPrototype")
+                ->getMockForAbstractClass();
+        
+        $this->trait = $this->getMockBuilder("GdgDataMapper\AbstractMapperTrait")->getMockForTrait();
     }
     
-    /**
-     * @return \GdgDataMapper\Mapper\AbstractPrototype
-     * @throws GdgDataMapperRuntimeException
+    /** 
+     * @test
+     * @expectedException \GdgDataMapper\Exception\RuntimeException
+     * @expectedExceptionMessage Mapper prototype is not set
      */
-    public function getMapperPrototype()
+    public function mustReturnRuntimeExceptionIfMapperPrototypeIsNotSet()
     {
-        if(!isset($this->mapper)) {
-            throw new GdgDataMapperRuntimeException("Mapper prototype is not set");
-        }
-        
-        return $this->mapper;
+        $this->trait->getMapperPrototype();
+    }
+    
+    /** 
+     * @test
+     */
+    public function mustReturnMapperPrototype()
+    {
+        $this->trait->setMapperPrototype($this->mapper);
+        $this->assertEquals($this->mapper, $this->trait->getMapperPrototype());
     }
 }

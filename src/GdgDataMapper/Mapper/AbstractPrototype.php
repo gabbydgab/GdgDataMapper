@@ -31,7 +31,7 @@ namespace GdgDataMapper\Mapper;
  * 
  * @package GdgDataMapper\Mapper
  */
-abstract class AbstractPrototype
+abstract class AbstractPrototype implements AwareInterface
 {
-    
+    protected $dbAdapter;
 }
