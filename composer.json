@@ -26,7 +26,8 @@
     "autoload": {
         "psr-4": {
             "GdgDataMapper\\Entity\\": "src/GdgDataMapper/Entity/",
-            "GdgDataMapper\\Mapper\\": "src/GdgDataMapper/Mapper/"
+            "GdgDataMapper\\Mapper\\": "src/GdgDataMapper/Mapper/",
+            "GdgDataMapper\\Exception\\": "src/GdgDataMapper/Exception/"
         },
         "classmap": [
             "./src/GdgDataMapper/AbstractEntityTrait.php",
