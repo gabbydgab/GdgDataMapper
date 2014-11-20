@@ -26,6 +26,9 @@
 
 namespace GdgDataMapper\Entity;
 
+use GdgDataMapper\Exception\InvalidArgumentException AS GdgDataMapperInvalidArgumentException;
+use GdgDataMapper\Exception\RuntimeException AS GdgDataMapperRuntimeException;
+
 /**
  * GdgDataMapper\Entity\AbstractPrototype
  * 
@@ -39,10 +42,37 @@ abstract class AbstractPrototype implements AwareInterface
 
     public function setKeyId($id)
     {
-        if(!isset($id)) {
-            throw new Exception($message, $code, $previous);
+        $this->keyId = $id;
+    }
+    
+    public function getKeyId()
+    {
+        if(!isset($this->keyId)) {
+            throw new GdgDataMapperRuntimeException("Key id is not set");
+        } 
+        
+        return $this->keyId;
+    }
+    
+    public function setKeyName($name)
+    {
+        if(is_int($name)) {
+            throw new GdgDataMapperInvalidArgumentException("Name value should not be integer");
         }
         
-        $this->keyId = $id;
+        if(is_object($name)) {
+            throw new GdgDataMapperInvalidArgumentException("Name value should not be object");
+        }
+        
+        $this->keyName = $name;
+    }
+    
+    public function getKeyName()
+    {
+        if (!isset($this->keyName)) {
+            throw new GdgDataMapperRuntimeException("Key name is not set");
+        }
+        
+        return $this->keyName;
     }
 }

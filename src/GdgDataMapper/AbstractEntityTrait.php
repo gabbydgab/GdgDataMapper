@@ -27,6 +27,7 @@
 namespace GdgDataMapper;
 
 use GdgDataMapper\Entity\AwareInterface AS EntityAwareInterface;
+use GdgDataMapper\Exception\RuntimeException AS GdgDataMapperRuntimeException;
 
 /**
  * GdgDataMapper\AbstractEntityTrait
@@ -55,7 +56,7 @@ trait AbstractEntityTrait
     public function getEntityPrototype()
     {
         if (!$this->entity) {
-            throw new Exception("Entity prototype is not set");
+            throw new GdgDataMapperRuntimeException("Entity prototype is not set");
         }
         
         return $this->entity;

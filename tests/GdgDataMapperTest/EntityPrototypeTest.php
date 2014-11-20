@@ -36,22 +36,113 @@ namespace GdgDataMapperTest;
 class EntityPrototypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \GdgDataMapperTest\SampleEntity
+     * @var \GdgDataMapper\Entity\AbstractPrototype
      */
     protected $entity;
     
+    protected $trait;
+
+    public function setUp()
+    {
+        $this->entity = $this->getMockBuilder("GdgDataMapper\Entity\AbstractPrototype")
+                ->getMockForAbstractClass();
+        
+        $this->trait = $this->getMockBuilder("GdgDataMapper\AbstractEntityTrait")->getMockForTrait();
+    }
+    
+    /** 
+     * @test
+     * @expectedException \GdgDataMapper\Exception\RuntimeException
+     * @expectedExceptionMessage Entity prototype is not set
+     */
+    public function mustReturnRuntimeExceptionIfEntityPrototypeIsNotSet()
+    {
+        $this->trait->getEntityPrototype();
+    }
+
     /**
      * @test
-     * 
      */
     public function mustReturnEntityPrototype()
     {
-        $this->entity = new \GdgDataMapperTest\SampleEntity();
+        $this->trait->setEntityPrototype($this->entity);        
+        $this->assertEquals($this->entity, $this->trait->getEntityPrototype());
+    }
+    
+    /** 
+     * @test
+     * @expectedException \GdgDataMapper\Exception\RuntimeException
+     * @expectedExceptionMessage Key id is not set
+     */
+    public function mustReturnRuntimeExceptionIfKeyIdIsNotSet()
+    {
         $this->entity->getKeyId();
-//        $entity = $this->getMockBuilder("GdgDataMapper\Entity\AbstractPrototype");
-//        $mock->setEntityPrototype($entity);
-//        var_dump($mock); exit;
-//        $mock->getEntityPrototype();
-//        $this->entity->getKeyId();
+    }
+    
+    public function keyIds()
+    {
+        return [
+            [1234],
+            ["uid-1203234"],
+            ["stringkey"],
+        ];
+    }
+    
+    /** 
+     * @test
+     * @dataProvider keyIds
+     */
+    public function mustReturnKeyId($ids)
+    {    
+        $this->entity->setKeyId($ids);        
+        $this->assertEquals($ids, $this->entity->getKeyId());
+    }
+    
+    /** 
+     * @test
+     * @expectedException \GdgDataMapper\Exception\RuntimeException
+     * @expectedExceptionMessage Key name is not set
+     */
+    public function mustReturnRuntimeExceptionIfKeyNameIsNotSet()
+    {
+        $this->entity->getKeyName();
+    }
+    
+    public function keyNames()
+    {
+        return [
+            ['product_id'],
+            ['brand_id']  
+        ];
+    }
+    
+    /**
+     * @test
+     * @dataProvider keyNames
+     */
+    public function mustReturnKeyName($name)
+    {
+        $this->entity->setKeyName($name);
+        $this->assertEquals($name, $this->entity->getKeyName());
+    }
+    
+    /**
+     * @test
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Name value should not be object
+     */
+    public function mustReturnInvalidExceptionIfKeyNameIsTypeObject()
+    {
+        $this->entity->setKeyName(new \stdClass());
+    }
+    
+    /**
+     * @test
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Name value should not be integer
+     */
+    public function mustReturnInvalidExceptionIfKeyNameIsTypeInteger()
+    {
+        $this->entity->setKeyName(1234);
     }
 }

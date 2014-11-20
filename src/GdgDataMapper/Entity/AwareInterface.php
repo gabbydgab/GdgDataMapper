@@ -35,9 +35,9 @@ interface AwareInterface
 {
     public function setKeyId($id);
     
-//    public function getKeyId();
+    public function getKeyId();
     
-//    public function setKeyName($name);
+    public function setKeyName($name);
     
-//    public function getKeyName();
+    public function getKeyName();
 }
